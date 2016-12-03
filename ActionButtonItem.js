@@ -40,7 +40,7 @@ export default class ActionButtonItem extends Component {
           alignItems: this.state.alignItems,
           marginBottom: this.props.verticalOrientation === 'up' ? margin : 0, // does not seem necessary
           marginTop: this.props.verticalOrientation === 'down' ? margin : 0, // does not seem necessary
-          marginHorizontal: 8,
+          marginHorizontal: 0,
           opacity: this.props.anim,
           transform: [
             { translateX },
@@ -82,9 +82,11 @@ export default class ActionButtonItem extends Component {
             activeOpacity={this.props.activeOpacity || 0.85}
             onPress={this.props.onPress}
           >
-            <Text style={[styles.actionText, this.props.textStyle, { color: this.props.titleColor || '#444' }]}>
-              {this.props.title}
-            </Text>
+            <View style={[this.props.titleContainerStyle, styles.actionTextWrapperView]}>
+              <Text style={[styles.actionText, this.props.textStyle, { color: this.props.titleColor || '#444' }]}>
+                {this.props.title}
+              </Text>
+            </View>
           </TouchableOpacity>
         )}
       </Animated.View>
@@ -142,8 +144,6 @@ const styles = StyleSheet.create({
   },
   actionTextView: {
     position: 'absolute',
-    paddingVertical: 4,
-    paddingHorizontal: 10,
     borderRadius: 3,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: '#eee',
@@ -151,5 +151,10 @@ const styles = StyleSheet.create({
   actionText: {
     flex: 1,
     fontSize: 14,
+  },
+  actionTextWrapperView: {
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRightWidth: 5
   }
 });
