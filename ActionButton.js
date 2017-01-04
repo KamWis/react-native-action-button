@@ -307,7 +307,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     backgroundColor: 'transparent',
-    zIndex: 10000
   },
   actionBarItem: {
     alignItems: 'center',
