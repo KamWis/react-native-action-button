@@ -1,11 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, Text, View, Animated, TouchableOpacity, Platform } from 'react-native';
 import ActionButtonItem from './ActionButtonItem';
 
 const alignItemsMap = {
-  "center" : "center",
-  "left"  : "flex-start",
-  "right" : "flex-end"
+  "center": "center",
+  "left": "flex-start",
+  "right": "flex-end"
 }
 
 const shadowHeight = 12;
@@ -38,7 +39,7 @@ export default class ActionButton extends Component {
 
   getActionButtonStyles() {
     const actionButtonStyles = [styles.actionBarItem, this.getButtonSize()];
-    if(!this.props.hideShadow) actionButtonStyles.push(styles.btnShadow);
+    if (!this.props.hideShadow) actionButtonStyles.push(styles.btnShadow);
     return actionButtonStyles;
   }
 
@@ -124,20 +125,20 @@ export default class ActionButton extends Component {
           outputRange: [this.props.buttonColor, buttonColorMax]
         }),
         transform: [{
-            scale: this.anim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, this.props.outRangeScale]
-            }),
-          }, {
-            rotate: this.anim.interpolate({
-              inputRange: [0, 1],
-              outputRange: ['0deg', this.props.degrees + 'deg']
-            })
-          }],
+          scale: this.anim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, this.props.outRangeScale]
+          }),
+        }, {
+          rotate: this.anim.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['0deg', this.props.degrees + 'deg']
+          })
+        }],
       },
     ];
 
-    if(!this.props.hideShadow && Platform.OS === 'android') animatedViewStyle.push(styles.btnShadow);
+    if (!this.props.hideShadow && Platform.OS === 'android') animatedViewStyle.push(styles.btnShadow);
 
     return (
       <View style={this.getActionButtonStyles()}>
@@ -186,29 +187,29 @@ export default class ActionButton extends Component {
     }
 
     return (
-        <View
-          style={this.getActionsStyle()}
-          pointerEvents={'box-none'}
-        >
-          {actionButtons.map((ActionButton, index) => {
-            return (
-              <ActionButtonItem
-                key={index}
-                anim={this.anim}
-                {...this.props}
-                parentSize={this.props.size}
-                btnColor={this.props.btnOutRange}
-                {...ActionButton.props}
-                onPress={() => {
-                  if (this.props.autoInactive){
-                    this.timeout = setTimeout(this.reset.bind(this), 200);
-                  }
-                  ActionButton.props.onPress();
-                }}
-              />
-            )
-          })}
-        </View>
+      <View
+        style={this.getActionsStyle()}
+        pointerEvents={'box-none'}
+      >
+        {actionButtons.map((ActionButton, index) => {
+          return (
+            <ActionButtonItem
+              key={index}
+              anim={this.anim}
+              {...this.props}
+              parentSize={this.props.size}
+              btnColor={this.props.btnOutRange}
+              {...ActionButton.props}
+              onPress={() =>  {
+                if (this.props.autoInactive) {
+                  this.timeout = setTimeout(this.reset.bind(this), 200);
+                }
+                ActionButton.props.onPress();
+              }}
+            />
+          )
+        })}
+      </View>
     );
   }
 
@@ -227,7 +228,7 @@ export default class ActionButton extends Component {
   // Animation Methods
   //////////////////////
 
-  animateButton(animate=true) {
+  animateButton(animate = true) {
     if (this.state.active) return this.reset();
 
     if (animate) {
@@ -239,7 +240,7 @@ export default class ActionButton extends Component {
     this.setState({ active: true });
   }
 
-  reset(animate=true) {
+  reset(animate = true) {
     if (this.props.onReset) this.props.onReset();
 
     if (animate) {
@@ -288,7 +289,7 @@ ActionButton.defaultProps = {
   spacing: 20,
   outRangeScale: 1,
   autoInactive: true,
-  onPress: () => {},
+  onPress: () => { },
   backdrop: false,
   degrees: 135,
   position: 'right',
